@@ -81,31 +81,31 @@ const SignIn = () => {
     const [password,setPassword]=useState("");
     const dispatch=useDispatch(); 
     const navigate=useNavigate();
-    const handleSignin=async (e)=>{
+    const handleSignin = async (e) => {
         e.preventDefault();
         dispatch(loginStart());
-        try{
-            const res=await axios.post(`https://vision-box-backend.vercel.app/api/auth/signin`,{name,password});
-            const accessToken = Cookies.get('access_token');
-            const newdata={...res.data,accessToken};
-            dispatch(loginSuccess(newdata));
-            // console.log(accessToken);
-            // console.log(res);
-            navigate("/");
+        try {
+          const res = await axios.post(
+            'https://vision-box-backend.vercel.app/api/auth/signin',
+            { name, password },
+            
+          );
+          
+          dispatch(loginSuccess(res.data));
+          console.log(res.data.accessToken);
+          navigate('/');
+        } catch (err) {
+          dispatch(loginFailure());
+          console.log(err);
         }
-        catch(err){
-            dispatch(loginFailure());
-            console.log(err);
-        }
-    }
+      };
     const handleSignUp=async (e)=>{
         e.preventDefault();
         dispatch(loginStart());
         try{
             const res=await axios.post(`https://vision-box-backend.vercel.app/api/auth/signup`,{name,email,password});
-            const accessToken = Cookies.get('access_token');
-            const newdata={...res.data,accessToken};
-            dispatch(loginSuccess(newdata));
+        
+            dispatch(loginSuccess(res.data));
             navigate("/");
         }
         catch(err){
@@ -141,11 +141,9 @@ const SignIn = () => {
             image: result.user.photoURL,
           });
       
-          const accessToken = Cookies.get('access_token');
-          console.log(accessToken);
-      
-          const newdata = { ...response.data, accessToken };
-          dispatch(loginSuccess(newdata));
+
+        
+          dispatch(loginSuccess(response.data));
           // dispatch(loginSuccess(response.data))
           navigate("/");
         } catch (err) {
