@@ -10,6 +10,7 @@ import SignIn from "./components/SignIn";
 import './Scrollbar.css'
 import Search from "./components/Search";
 import { useSelector } from "react-redux";
+import { SetMeal } from "@mui/icons-material";
 const Container = styled.div`
   display: flex;
   // color: blue;
@@ -29,14 +30,17 @@ const Main=styled.div`
 
 function App() {
   const [darkMode,setdarkMode]=useState(true);
-  
+  const [small,setSmall]=useState(true);
+  const toggleSmall=(value)=>{
+      setSmall(value);
+  }
   return (
   <ThemeProvider theme={darkMode?darktheme:lighttheme}>
    <BrowserRouter>
   <Container>
-   <Menu darkMode={darkMode} setdarkMode={setdarkMode} ></Menu>
+   <Menu darkMode={darkMode} setdarkMode={setdarkMode} small={small}></Menu>
     <Main>
-      <Navbar></Navbar>
+      <Navbar toggleSmall={toggleSmall} small={small}></Navbar>
       <Wrapper>
       <Routes>
       <Route path="/">

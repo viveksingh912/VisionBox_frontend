@@ -27,7 +27,20 @@ const Container = styled.div`
   color: ${({ theme }) => theme.text};
   position: sticky;
   top: 0;
+  transition: transform 0.5s;
+  transform: translate(0%);
   /* overflow: auto; */
+  @media (max-width: 800px) {
+    position: absolute;
+    max-width: 30vw;
+  }
+  &.${props => props.className} {
+    @media (max-width: 800px) {
+      transition: transform 0.5s;
+      transform: translate(-100%);
+    }
+  }
+
 `;
 const Wrapper = styled.div`
   padding: 18px 26px;
@@ -84,7 +97,7 @@ const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <Container>
+    <Container className={`${props.small?'small-class':''}`}>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Logo>

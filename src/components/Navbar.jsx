@@ -69,12 +69,31 @@ const Avatar=styled.img`
   border-radius: 50%;
   background-color: #999;
 `
-const Navbar = () => {
+const HamBurger=styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10vw;
+  z-index: 10;
+  display: none;
+  @media (max-width: 800px) {
+    display: block;
+  }
+`
+const HamItem=styled.div`
+  height: 3px;
+  width: 20px;
+  background-color: white;
+  background:white;
+  margin: 5px  0px;
+`
+
+const Navbar = (props) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate=useNavigate();
   const [open,setOpen]=useState(false);
   const [q,setQ]=useState("");
   const dispatch=useDispatch();
+  const {small,toggleSmall}=props;
   const setData=(val)=>{
       setOpen(val);
   }
@@ -89,6 +108,11 @@ const Navbar = () => {
   return (
     <>
     <Container>
+      <HamBurger onClick={()=>{toggleSmall(!small)}}>
+        <HamItem></HamItem>
+        <HamItem></HamItem>
+        <HamItem></HamItem>
+      </HamBurger>
       <Wrapper>
         <Search>
           <Input placeholder="Search" onChange={(e)=>setQ(e.target.value)}></Input>
