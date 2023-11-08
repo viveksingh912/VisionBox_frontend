@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Container = styled .div`
   flex: 2;
 `;
-const Recomendation = ({tags}) => {
+const Recomendation = ({tags,type}) => {
   const[videos,setVideos]=useState([]); 
   useEffect(() => {
     const fetchVideo=async()=>{
@@ -19,7 +19,7 @@ const Recomendation = ({tags}) => {
     <Container>
       {
         videos.map((video)=>{
-          return <Card key={video._id} video={video} type="sm"/>
+          return <Card key={video._id} video={video} type={type}/>
         })
       }
     </Container>

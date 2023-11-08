@@ -26,14 +26,18 @@ const Search = styled.div`
   align-items: center;
 `;
 const SearchContainer=styled.div`
-   width: 70%; /* Limit to 60% of the remaining width */
+   /* max-width: 70%; */
+   width: 70%;
    max-width: 500px;
-   min-width: 290px;
+   /* min-width: 290px; */
    border: 1px solid #ccc;
    border-radius: 25px;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   @media (max-width:700px) {
+    width: 80%;
+   }
 `
 const Input = styled.input`
   flex: 1;
@@ -46,6 +50,10 @@ const Input = styled.input`
   font-weight: 500;
   font-size: 15px;
   border-right: 1px solid #ccc;
+  @media (max-width:700px) {
+    width: 85%;
+    padding: 8px 8px;
+   }
 `;
 
 const Button = styled.button`
@@ -74,7 +82,7 @@ const Avatar = styled.img`
 
 const HamBurger = styled.div`
   display: none;
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     display: block;
   }
 `;
@@ -127,7 +135,7 @@ const Navbar = (props) => {
           <LogoutIcon onClick={hadleLogOut} />
           <VideoCallIcon onClick={() => setData(true)} />
           <Avatar src={currentUser.image} />
-          {currentUser.name}
+          {/* {currentUser.name} */}
         </User>
       ) : (
         <Link to="/signin">

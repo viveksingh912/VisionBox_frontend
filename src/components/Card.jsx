@@ -9,6 +9,10 @@ const Container=styled.div`
     margin-bottom: ${(props)=>props.type==='sm' ?'10px':'40px'};
     display: ${(props)=>props.type==='sm' && 'flex'};
     gap: 10px;
+    @media (max-width: 2000px) {
+      display: ${(props)=>props.type==='lg' && 'flex'};
+      width: ${(props)=>props.type==='lg' && '100%'};
+    }
 `
 const Image=styled.img`
     width:${(props)=>props.type!=='sm'?'100%':'10vw'};
@@ -16,6 +20,11 @@ const Image=styled.img`
     background-color: #999;
     margin-bottom: ${(props)=>props.type!=='sm' && '40px'};
     flex: 1;
+    @media (max-width: 2000px) {
+      display: ${(props)=>props.type==='lg' && 'flex'};
+      margin-bottom: ${(props)=>props.type==='lg' && '0px'};
+      max-width: ${(props)=>props.type==='lg'?'50%':'100%'};
+    }
 `
 const Details=styled.div`
   display: flex;
@@ -23,6 +32,10 @@ const Details=styled.div`
   margin-top: ${(props)=>props.type!=='sm' && '15px'};
   align-items: center;
   flex: 1;
+  @media (max-width: 2000px) {
+    justify-content: ${(props)=>props.type==='lg' && 'center'};
+    margin-top: ${(props)=>props.type==='lg' && '0px'};
+  }
 `
 const ChannelIMage=styled.img`
   height: 40px;
