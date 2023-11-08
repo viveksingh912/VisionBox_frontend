@@ -7,7 +7,7 @@ const Container=styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    overflow: scroll;
+    overflow: auto;
     height: 100%;
 `
 const Home = ({type}) => {
