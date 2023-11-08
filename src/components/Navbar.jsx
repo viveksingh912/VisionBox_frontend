@@ -92,7 +92,6 @@ const HamItem = styled.div`
   height: 3px;
   width: 20px;
   background-color:${({theme})=>theme.text};
-  background-color: white;
   background: ${({theme})=>theme.text};
   margin: 5px 0px;
 `;
