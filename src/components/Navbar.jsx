@@ -91,8 +91,8 @@ const HamBurger = styled.div`
 const HamItem = styled.div`
   height: 3px;
   width: 20px;
-  background-color: white;
-  background: white;
+  background-color:${({theme})=>theme.text};
+  background: ${({theme})=>theme.text};
   margin: 5px 0px;
 `;
 
