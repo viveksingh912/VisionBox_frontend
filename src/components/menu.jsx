@@ -33,7 +33,7 @@ const Container = styled.div`
   /* overflow: auto; */
   @media (max-width: 1000px) {
     position: absolute;
-    max-width: 30vw;
+    max-width: 40vw;
   }
   &.${props => props.className} {
     @media (max-width: 1000px) {

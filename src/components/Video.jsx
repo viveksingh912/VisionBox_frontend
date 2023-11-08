@@ -56,6 +56,9 @@ const Info = styled.div``;
 const Buttons = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 500px) {
+    gap: 12px;
+  }
 `;
 const Button = styled.span`
   display: flex;
@@ -230,7 +233,7 @@ const Video = () => {
         </VideoWrapper>
         <Title>{currentVideo?.title}</Title>
         <Details>
-          <Info> {currentVideo?.views} views 4 hours ago</Info>
+          <Info> {currentVideo?.views} views </Info>
           <Buttons>
             <Button onClick={handleLike}>
               {currentVideo?.likes?.includes(currentUser?._id) ? (

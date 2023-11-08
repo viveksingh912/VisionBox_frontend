@@ -70,6 +70,7 @@ const User = styled.div`
   display: flex;
   align-items: center;
   font-weight: 500;
+  gap:5px;
   color: ${({ theme }) => theme.text};
 `;
 
