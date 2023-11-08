@@ -6,7 +6,9 @@ import axios from 'axios'
 const Container=styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    overflow: auto;
+    height: 100%;
 `
 const Home = ({type}) => {
   const [videos,setVideos]=useState([]);

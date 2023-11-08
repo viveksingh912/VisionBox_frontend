@@ -25,6 +25,8 @@ const Container = styled.div`
   display: flex;
   gap: 20px;
   /* justify-content: space-between; */
+  height: 100%;
+  overflow: auto;
   width: 100%;
 `;
 const Content = styled.div`
@@ -34,6 +36,9 @@ const Content = styled.div`
 const VideoWrapper = styled.div`
   width: 100%;
   height: 500px;
+  @media (max-width: 1000px) {
+    height: auto;
+  }
 `;
 const Title = styled.h1`
   margin-top: 20px;
@@ -51,6 +56,9 @@ const Info = styled.div``;
 const Buttons = styled.div`
   display: flex;
   gap: 20px;
+  @media (max-width: 500px) {
+    gap: 12px;
+  }
 `;
 const Button = styled.span`
   display: flex;
@@ -116,6 +124,7 @@ const Video = () => {
   const path = useLocation().pathname.split("/")[2];
 
   const [channel, setChannel] = useState({});
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -138,7 +147,15 @@ const Video = () => {
     };
     fetchData();
   }, [path, dispatch]);
-
+  useEffect(()=>{
+    const updateScreenWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', updateScreenWidth);
+    return () => {
+      window.removeEventListener('resize', updateScreenWidth);
+    };
+  },[])
   const handleLike = async () => {
     let accessToken = null;
     const User = localStorage.getItem("user");
@@ -216,7 +233,7 @@ const Video = () => {
         </VideoWrapper>
         <Title>{currentVideo?.title}</Title>
         <Details>
-          <Info> {currentVideo?.views} views 4 hours ago</Info>
+          <Info> {currentVideo?.views} views </Info>
           <Buttons>
             <Button onClick={handleLike}>
               {currentVideo?.likes?.includes(currentUser?._id) ? (
@@ -260,8 +277,13 @@ const Video = () => {
         </Channel>
         <Hr />
         <Comments videoId={currentVideo?._id} />
+        {screenWidth <= 1000 && (
+        <Recomendation tags={currentVideo?.tags} type="lg" />
+        )}
       </Content>
-      <Recomendation tags={currentVideo?.tags}></Recomendation>
+      {screenWidth > 1000 && (
+        <Recomendation tags={currentVideo?.tags} type="sm" />
+        )}
     </Container>
   );
 };

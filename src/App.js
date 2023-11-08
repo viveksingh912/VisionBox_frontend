@@ -10,6 +10,7 @@ import SignIn from "./components/SignIn";
 import './Scrollbar.css'
 import Search from "./components/Search";
 import { useSelector } from "react-redux";
+import { SetMeal } from "@mui/icons-material";
 const Container = styled.div`
   display: flex;
   // color: blue;
@@ -17,7 +18,8 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  padding: 22px 90px;
+  height: calc(100vh - 104px);
+  padding: 22px 0px;
 `;
 const Main=styled.div`
  background-color:${({theme})=>theme.bg};
@@ -29,14 +31,17 @@ const Main=styled.div`
 
 function App() {
   const [darkMode,setdarkMode]=useState(true);
-  
+  const [small,setSmall]=useState(true);
+  const toggleSmall=(value)=>{
+      setSmall(value);
+  }
   return (
   <ThemeProvider theme={darkMode?darktheme:lighttheme}>
    <BrowserRouter>
   <Container>
-   <Menu darkMode={darkMode} setdarkMode={setdarkMode} ></Menu>
+   <Menu darkMode={darkMode} setdarkMode={setdarkMode} small={small}></Menu>
     <Main>
-      <Navbar></Navbar>
+      <Navbar toggleSmall={toggleSmall} small={small}></Navbar>
       <Wrapper>
       <Routes>
       <Route path="/">
