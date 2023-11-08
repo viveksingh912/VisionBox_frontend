@@ -86,20 +86,6 @@ const HamItem = styled.div`
   background: white;
   margin: 5px 0px;
 `;
-const Dropdown = styled.div`
-  position: absolute;
-  top: 60px;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  display: none;
-
-  @media (max-width: 800px) {
-    display: block;
-  }
-`;
 
 const Navbar = (props) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -137,20 +123,12 @@ const Navbar = (props) => {
         </SearchContainer>
       </Search>
       {currentUser ? (
-        // <User>
-        //   <LogoutIcon onClick={hadleLogOut} />
-        //   <VideoCallIcon onClick={() => setData(true)} />
-        //   <Avatar src={currentUser.image} />
-        //   {currentUser.name}
-        // </User>
-        <Dropdown>
         <User>
           <LogoutIcon onClick={hadleLogOut} />
           <VideoCallIcon onClick={() => setData(true)} />
           <Avatar src={currentUser.image} />
           {currentUser.name}
         </User>
-      </Dropdown>
       ) : (
         <Link to="/signin">
           <Button>Sign In</Button>
