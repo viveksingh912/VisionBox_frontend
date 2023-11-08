@@ -18,7 +18,11 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
+  height: calc(100vh - 60px);
   padding: 22px 90px;
+  @media (max-width:800px) {
+    padding: 22px 0px;
+  }
 `;
 const Main=styled.div`
  background-color:${({theme})=>theme.bg};
