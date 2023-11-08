@@ -25,6 +25,8 @@ const Container = styled.div`
   display: flex;
   gap: 20px;
   /* justify-content: space-between; */
+  height: 100%;
+  overflow: auto;
   width: 100%;
 `;
 const Content = styled.div`
