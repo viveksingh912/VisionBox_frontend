@@ -23,6 +23,7 @@ const Container = styled.div`
   justify-content: center;
   flex: 1.3;
   height: 100vh;
+  overflow: hidden;
   background: ${({ theme }) => theme.bgLight};
   color: ${({ theme }) => theme.text};
   position: sticky;
