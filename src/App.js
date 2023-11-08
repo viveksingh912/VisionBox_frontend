@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 104px);
   padding: 22px 90px;
   @media (max-width:800px) {
     padding: 22px 0px;
