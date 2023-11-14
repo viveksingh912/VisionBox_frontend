@@ -147,7 +147,7 @@ const Video = () => {
     };
     fetchData();
   }, [path, dispatch]);
-  useEffect(()=>{
+  useEffect(() => {
     const updateScreenWidth = () => {
       setScreenWidth(window.innerWidth);
     };
@@ -155,7 +155,7 @@ const Video = () => {
     return () => {
       window.removeEventListener('resize', updateScreenWidth);
     };
-  },[])
+  }, [])
   const handleLike = async () => {
     let accessToken = null;
     const User = localStorage.getItem("user");
@@ -164,40 +164,40 @@ const Video = () => {
       accessToken = data.accessToken;
     }
     else
-    return;
+      return;
     // Set up an Axios instance with a default header for the 'access_token' cookie
     const headers = {
       Authorization: `Bearer ${accessToken}`, // Add the access token to the header
     };
     // console.log(headers);
-    await axios.put(`https://vision-box-backend.vercel.app/api/users/like/${currentVideo._id}`,{}, { headers });
+    await axios.put(`https://vision-box-backend.vercel.app/api/users/like/${currentVideo._id}`, {}, { headers });
     dispatch(like(currentUser._id));
   };
 
   const handleDislike = async () => {
-    let accessToken =null;
-    const User= localStorage.getItem('user');
-    if(User){
-      const data=JSON.parse(User);
-      accessToken=data.accessToken;
-    }  
+    let accessToken = null;
+    const User = localStorage.getItem('user');
+    if (User) {
+      const data = JSON.parse(User);
+      accessToken = data.accessToken;
+    }
     else
-    return;
+      return;
     // Set up an Axios instance with a default header for the 'access_token' cookie
     const headers = {
       Authorization: `Bearer ${accessToken}`, // Add the access token to the header
     };
     console.log(headers);
-    await axios.put(`https://vision-box-backend.vercel.app/api/users/dislike/${currentVideo._id}`,{},{headers});
+    await axios.put(`https://vision-box-backend.vercel.app/api/users/dislike/${currentVideo._id}`, {}, { headers });
     dispatch(dislike(currentUser._id));
   };
   const handleSub = async () => {
-    let accessToken =null;
-    const User= localStorage.getItem('user');
-    if(User){
-      const data=JSON.parse(User);
-      accessToken=data.accessToken;
-    }  
+    let accessToken = null;
+    const User = localStorage.getItem('user');
+    if (User) {
+      const data = JSON.parse(User);
+      accessToken = data.accessToken;
+    }
     // Set up an Axios instance with a default header for the 'access_token' cookie
     const headers = {
       Authorization: `Bearer ${accessToken}`, // Add the access token to the header
@@ -205,21 +205,21 @@ const Video = () => {
     // console.log(accessToken);
     // console.log(channel?._id);
     if (currentUser && currentUser.subscribedUsers.includes(channel._id)) {
-      try{
-      await axios.put(`https://vision-box-backend.vercel.app/api/users/unsub/${channel._id}`,{},{headers});
-      setChannel({ ...channel, subscribers: channel.subscribers - 1 });
-      dispatch(subscription(channel._id));
+      try {
+        await axios.put(`https://vision-box-backend.vercel.app/api/users/unsub/${channel._id}`, {}, { headers });
+        setChannel({ ...channel, subscribers: channel.subscribers - 1 });
+        dispatch(subscription(channel._id));
       }
-      catch(err){
+      catch (err) {
         console.log(err);
       }
     } else if (currentUser) {
-      try{
-      await axios.put(`https://vision-box-backend.vercel.app/api/users/sub/${channel._id}`,{},{headers});
-      setChannel({ ...channel, subscribers: channel.subscribers + 1 });
-      dispatch(subscription(channel._id));
+      try {
+        await axios.put(`https://vision-box-backend.vercel.app/api/users/sub/${channel._id}`, {}, { headers });
+        setChannel({ ...channel, subscribers: channel.subscribers + 1 });
+        dispatch(subscription(channel._id));
       }
-      catch(err){
+      catch (err) {
         console.log(err);
       }
     }
@@ -278,12 +278,12 @@ const Video = () => {
         <Hr />
         <Comments videoId={currentVideo?._id} />
         {screenWidth <= 1000 && (
-        <Recomendation tags={currentVideo?.tags} type="lg" />
+          <Recomendation tags={currentVideo?.tags} type="lg" />
         )}
       </Content>
       {screenWidth > 1000 && (
         <Recomendation tags={currentVideo?.tags} type="sm" />
-        )}
+      )}
     </Container>
   );
 };
