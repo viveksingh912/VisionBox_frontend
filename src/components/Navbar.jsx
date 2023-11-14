@@ -136,7 +136,7 @@ const Navbar = (props) => {
             <LogoutIcon onClick={hadleLogOut} />
             <VideoCallIcon onClick={() => setData(true)} />
             <Avatar src={currentUser.image} />
-            {/* {currentUser.name} */}  "trailingComma": "es5",
+            {/* {currentUser.name} */} 
 
           </User>
         ) : (

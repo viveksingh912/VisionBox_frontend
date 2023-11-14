@@ -18,6 +18,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CloseIcon from '@mui/icons-material/Close';
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -30,6 +31,7 @@ const Container = styled.div`
   top: 0;
   transition: transform 0.5s;
   transform: translate(0%);
+  z-index: 5;
   /* overflow: auto; */
   @media (max-width: 1000px) {
     position: absolute;
@@ -94,31 +96,45 @@ const Button = styled.button`
   margin-top: 10px;
   cursor: pointer;
 `;
+const Cross=styled.div`
+  position: absolute;
+  top: 1vh;
+  right:1vw;
+  display: none;
+  @media (max-width: 1000px) {
+    display: block;
+  }
+`
 const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
+  const {small,setSmall}=props;
+
   return (
     <Container className={`${props.small ? 'small-class' : ''}`}>
+    <Cross onClick={()=>setSmall(!small)}>
+      <CloseIcon/>
+    </Cross>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Logo>
+          <Logo onClick={()=>setSmall(!small)}>
             {/* <Img src={logo}></Img> */}
             <SmartDisplayIcon />
             VisionBox
           </Logo>
-          <Item>
+          <Item onClick={()=>setSmall(!small)}>
             <HomeIcon />
             Home
           </Item>
         </Link>
         <Link to="trends" style={{ textDecoration: "none" }}>
-          <Item>
+          <Item onClick={()=>setSmall(!small)}>
             <ExploreIcon />
             Explore
           </Item>
         </Link>
         {currentUser && <Link to="subscriptions" style={{ textDecoration: "none" }}>
-          <Item>
+          <Item onClick={()=>setSmall(!small)}>
             <SubscriptionsIcon />
             Subscriptions
           </Item>
@@ -138,7 +154,7 @@ const Menu = (props) => {
         {!currentUser && (
           <>
             <Hr></Hr>
-            <Login>
+            <Login onClick={()=>setSmall(!small)}>
               <span>Sign in to like videos, comment, and subscribe.</span>
               <Link to="signin" style={{ textDecoration: "none" }}>
                 <Button>Sign In</Button>
@@ -186,6 +202,7 @@ const Menu = (props) => {
         <Item
           onClick={() => {
             setdarkMode(!darkMode);
+            setSmall(!small);
           }}
         >
           <LightModeIcon />

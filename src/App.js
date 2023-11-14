@@ -40,6 +40,7 @@ function App() {
             darkMode={darkMode}
             setdarkMode={setdarkMode}
             small={small}
+            setSmall={setSmall}
           ></Menu>
           <Main>
             <Navbar toggleSmall={toggleSmall} small={small}></Navbar>
