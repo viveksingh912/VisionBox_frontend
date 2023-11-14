@@ -25,7 +25,7 @@ const Search = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SearchContainer=styled.div`
+const SearchContainer = styled.div`
    /* max-width: 70%; */
    width: 70%;
    max-width: 500px;
@@ -91,8 +91,8 @@ const HamBurger = styled.div`
 const HamItem = styled.div`
   height: 3px;
   width: 20px;
-  background-color:${({theme})=>theme.text};
-  background: ${({theme})=>theme.text};
+  background-color:${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.text};
   margin: 5px 0px;
 `;
 
@@ -119,32 +119,33 @@ const Navbar = (props) => {
 
   return (
     <>
-    <Container>
-      <HamBurger onClick={() => { toggleSmall(!small) }}>
-        <HamItem></HamItem>
-        <HamItem></HamItem>
-        <HamItem></HamItem>
-      </HamBurger>
-      <Search>
-        <SearchContainer>
-        <Input placeholder="Search" onChange={(e) => setQ(e.target.value)}></Input>
-        <SearchIcon style={{margin:"0px 5px"}} onClick={handleSwitch}></SearchIcon>
-        </SearchContainer>
-      </Search>
-      {currentUser ? (
-        <User>
-          <LogoutIcon onClick={hadleLogOut} />
-          <VideoCallIcon onClick={() => setData(true)} />
-          <Avatar src={currentUser.image} />
-          {/* {currentUser.name} */}
-        </User>
-      ) : (
-        <Link to="/signin">
-          <Button>Sign In</Button>
-        </Link>
-      )}
-    </Container>
-    {open && <Upload setData={setData} />}
+      <Container>
+        <HamBurger onClick={() => { toggleSmall(!small) }}>
+          <HamItem></HamItem>
+          <HamItem></HamItem>
+          <HamItem></HamItem>
+        </HamBurger>
+        <Search>
+          <SearchContainer>
+            <Input placeholder="Search" onChange={(e) => setQ(e.target.value)}></Input>
+            <SearchIcon style={{ margin: "0px 5px" }} onClick={handleSwitch}></SearchIcon>
+          </SearchContainer>
+        </Search>
+        {currentUser ? (
+          <User>
+            <LogoutIcon onClick={hadleLogOut} />
+            <VideoCallIcon onClick={() => setData(true)} />
+            <Avatar src={currentUser.image} />
+            {/* {currentUser.name} */}  "trailingComma": "es5",
+
+          </User>
+        ) : (
+          <Link to="/signin">
+            <Button>Sign In</Button>
+          </Link>
+        )}
+      </Container>
+      {open && <Upload setData={setData} />}
     </>
   );
 };

@@ -98,18 +98,18 @@ const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <Container className={`${props.small?'small-class':''}`}>
+    <Container className={`${props.small ? 'small-class' : ''}`}>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Logo>
             {/* <Img src={logo}></Img> */}
-            <SmartDisplayIcon/>
+            <SmartDisplayIcon />
             VisionBox
           </Logo>
           <Item>
-          <HomeIcon />
-          Home
-        </Item>
+            <HomeIcon />
+            Home
+          </Item>
         </Link>
         <Link to="trends" style={{ textDecoration: "none" }}>
           <Item>
@@ -117,24 +117,24 @@ const Menu = (props) => {
             Explore
           </Item>
         </Link>
-       {currentUser && <Link to="subscriptions" style={{ textDecoration: "none" }}>
+        {currentUser && <Link to="subscriptions" style={{ textDecoration: "none" }}>
           <Item>
             <SubscriptionsIcon />
             Subscriptions
           </Item>
         </Link>}
-       {currentUser && 
-       <>
-        <Hr></Hr>
-        <Item>
-          <VideoLibraryIcon />
-          Library
-        </Item>
-        </>}
-       { currentUser &&<Item>
+        {currentUser &&
+          <>
+            <Hr></Hr>
+            <Item>
+              <VideoLibraryIcon />
+              Library
+            </Item>
+          </>}
+        {currentUser && <Item>
           <HistoryIcon />
           History
-        </Item> }
+        </Item>}
         {!currentUser && (
           <>
             <Hr></Hr>
