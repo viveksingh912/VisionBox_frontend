@@ -19,7 +19,6 @@ import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
-import OutsideClickHandler from 'react-outside-click-handler';
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -97,7 +96,7 @@ const Button = styled.button`
   margin-top: 10px;
   cursor: pointer;
 `;
-const Cross = styled.div`
+const Cross=styled.div`
   position: absolute;
   top: 1vh;
   right:1vw;
@@ -109,114 +108,108 @@ const Cross = styled.div`
 const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
-  const { small, setSmall } = props;
+  const {small,setSmall}=props;
 
   return (
-    <OutsideClickHandler
-      onOutsideClick={() => {
-        setSmall(true);
-      }}
-    >
-      <Container className={`${props.small ? 'small-class' : ''}`}>
-        <Cross onClick={() => setSmall(true)}>
-          <CloseIcon />
-        </Cross>
-        <Wrapper>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Logo onClick={() => setSmall(true)}>
-              {/* <Img src={logo}></Img> */}
-              <SmartDisplayIcon />
-              VisionBox
-            </Logo>
-            <Item onClick={() => setSmall(true)}>
-              <HomeIcon />
-              Home
+    <Container className={`${props.small ? 'small-class' : ''}`}>
+    <Cross onClick={()=>setSmall(!small)}>
+      <CloseIcon/>
+    </Cross>
+      <Wrapper>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Logo onClick={()=>setSmall(!small)}>
+            {/* <Img src={logo}></Img> */}
+            <SmartDisplayIcon />
+            VisionBox
+          </Logo>
+          <Item onClick={()=>setSmall(!small)}>
+            <HomeIcon />
+            Home
+          </Item>
+        </Link>
+        <Link to="trends" style={{ textDecoration: "none" }}>
+          <Item onClick={()=>setSmall(!small)}>
+            <ExploreIcon />
+            Explore
+          </Item>
+        </Link>
+        {currentUser && <Link to="subscriptions" style={{ textDecoration: "none" }}>
+          <Item onClick={()=>setSmall(!small)}>
+            <SubscriptionsIcon />
+            Subscriptions
+          </Item>
+        </Link>}
+        {currentUser &&
+          <>
+            <Hr></Hr>
+            <Item>
+              <VideoLibraryIcon />
+              Library
             </Item>
-          </Link>
-          <Link to="trends" style={{ textDecoration: "none" }}>
-            <Item onClick={() => setSmall(true)}>
-              <ExploreIcon />
-              Explore
-            </Item>
-          </Link>
-          {currentUser && <Link to="subscriptions" style={{ textDecoration: "none" }}>
-            <Item onClick={() => setSmall(!small)}>
-              <SubscriptionsIcon />
-              Subscriptions
-            </Item>
-          </Link>}
-          {currentUser &&
-            <>
-              <Hr></Hr>
-              <Item>
-                <VideoLibraryIcon />
-                Library
-              </Item>
-            </>}
-          {currentUser && <Item>
-            <HistoryIcon />
-            History
-          </Item>}
-          {!currentUser && (
-            <>
-              <Hr></Hr>
-              <Login onClick={() => setSmall(true)}>
-                <span>Sign in to like videos, comment, and subscribe.</span>
-                <Link to="signin" style={{ textDecoration: "none" }}>
-                  <Button>Sign In</Button>
-                </Link>
-              </Login>
-            </>
-          )}
-          <Item>
-            <LibraryMusicIcon />
-            Music
-          </Item>
-          <Item>
-            <SportsVolleyballIcon />
-            Sports
-          </Item>
-          <Item>
-            <SportsEsportsIcon />
-            Gaming
-          </Item>
-          <Item>
-            <MovieCreationIcon />
-            Movies
-          </Item>
-          <Item>
-            <NewspaperIcon />
-            News
-          </Item>
-          <Item>
-            <LiveTvIcon />
-            Live
-          </Item>
-          <Hr></Hr>
-          <Item>
-            <SettingsApplicationsIcon />
-            Settings
-          </Item>
-          <Item>
-            <ReportIcon />
-            Report
-          </Item>
-          <Item>
-            <HelpIcon />
-            Help
-          </Item>
-          <Item
-            onClick={() => {
-              setdarkMode(!darkMode);
-              setSmall(!small);
-            }}
-          >
-            <LightModeIcon />
-            {darkMode ? "Light mode" : "Dark mode"}
-          </Item>
-        </Wrapper>
-      </Container>
-    </OutsideClickHandler >
+          </>}
+        {currentUser && <Item>
+          <HistoryIcon />
+          History
+        </Item>}
+        {!currentUser && (
+          <>
+            <Hr></Hr>
+            <Login onClick={()=>setSmall(!small)}>
+              <span>Sign in to like videos, comment, and subscribe.</span>
+              <Link to="signin" style={{ textDecoration: "none" }}>
+                <Button>Sign In</Button>
+              </Link>
+            </Login>
+          </>
+        )}
+        <Item>
+          <LibraryMusicIcon />
+          Music
+        </Item>
+        <Item>
+          <SportsVolleyballIcon />
+          Sports
+        </Item>
+        <Item>
+          <SportsEsportsIcon />
+          Gaming
+        </Item>
+        <Item>
+          <MovieCreationIcon />
+          Movies
+        </Item>
+        <Item>
+          <NewspaperIcon />
+          News
+        </Item>
+        <Item>
+          <LiveTvIcon />
+          Live
+        </Item>
+        <Hr></Hr>
+        <Item>
+          <SettingsApplicationsIcon />
+          Settings
+        </Item>
+        <Item>
+          <ReportIcon />
+          Report
+        </Item>
+        <Item>
+          <HelpIcon />
+          Help
+        </Item>
+        <Item
+          onClick={() => {
+            setdarkMode(!darkMode);
+            setSmall(!small);
+          }}
+        >
+          <LightModeIcon />
+          {darkMode ? "Light mode" : "Dark mode"}
+        </Item>
+      </Wrapper>
+    </Container>
   );
 };
 
