@@ -19,6 +19,7 @@ import SmartDisplayIcon from '@mui/icons-material/SmartDisplay';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CloseIcon from '@mui/icons-material/Close';
+import { useTheme } from 'styled-components';
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -109,6 +110,7 @@ const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
   const {small,setSmall}=props;
+  const theme =useTheme();
 
   return (
     <Container className={`${props.small ? 'small-class' : ''}`}>
@@ -142,12 +144,12 @@ const Menu = (props) => {
         {currentUser &&
           <>
             <Hr></Hr>
-            <Item>
+            <Item style={{ pointerEvents: "none",color: theme.textSoft }}>
               <VideoLibraryIcon />
               Library
             </Item>
           </>}
-        {currentUser && <Item>
+        {currentUser && <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <HistoryIcon />
           History
         </Item>}
@@ -156,46 +158,46 @@ const Menu = (props) => {
             <Hr></Hr>
             <Login onClick={()=>setSmall(!small)}>
               <span>Sign in to like videos, comment, and subscribe.</span>
-              <Link to="signin" style={{ textDecoration: "none" }}>
+              <Link to="signin" style={{ textDecoration: "none", color: theme.textSoft }}>
                 <Button>Sign In</Button>
               </Link>
             </Login>
           </>
         )}
-        <Item>
-          <LibraryMusicIcon />
-          Music
-        </Item>
-        <Item>
-          <SportsVolleyballIcon />
-          Sports
-        </Item>
-        <Item>
-          <SportsEsportsIcon />
-          Gaming
-        </Item>
-        <Item>
-          <MovieCreationIcon />
-          Movies
-        </Item>
-        <Item>
+        {/*<Item style={{ pointerEvents: "none", color: theme.textSoft}}>*/}
+        {/*  <LibraryMusicIcon />*/}
+        {/*  Music*/}
+        {/*</Item>*/}
+        {/*<Item style={{ pointerEvents: "none", color: theme.textSoft }}>*/}
+        {/*  <SportsVolleyballIcon />*/}
+        {/*  Sports*/}
+        {/*</Item >*/}
+        {/*<Item style={{ pointerEvents: "none", color: theme.textSoft }}>*/}
+        {/*  <SportsEsportsIcon />*/}
+        {/*  Gaming*/}
+        {/*</Item>*/}
+        {/*<Item style={{ pointerEvents: "none", color: theme.textSoft }}>*/}
+        {/*  <MovieCreationIcon />*/}
+        {/*  Movies*/}
+        {/*</Item>*/}
+        <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <NewspaperIcon />
           News
         </Item>
-        <Item>
+        <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <LiveTvIcon />
           Live
-        </Item>
+        </Item >
         <Hr></Hr>
-        <Item>
+        <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <SettingsApplicationsIcon />
           Settings
         </Item>
-        <Item>
+        <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <ReportIcon />
           Report
         </Item>
-        <Item>
+        <Item style={{ pointerEvents: "none", color: theme.textSoft }}>
           <HelpIcon />
           Help
         </Item>
