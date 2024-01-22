@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import styled from "styled-components";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -97,26 +97,26 @@ const Button = styled.button`
   margin-top: 10px;
   cursor: pointer;
 `;
-const Cross=styled.div`
-  position: absolute;
-  top: 1vh;
-  right:1vw;
-  display: none;
-  @media (max-width: 1000px) {
-    display: block;
-  }
-`
 const Menu = (props) => {
   const { darkMode, setdarkMode } = props;
   const { currentUser } = useSelector((state) => state.user);
   const {small,setSmall}=props;
   const theme =useTheme();
+  const menuRef= useRef();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setSmall(true);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Container className={`${props.small ? 'small-class' : ''}`}>
-    <Cross onClick={()=>setSmall(!small)}>
-      <CloseIcon/>
-    </Cross>
+    <Container className={`${props.small ? 'small-class' : ''}`} ref={menuRef}>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Logo onClick={()=>setSmall(!small)}>
