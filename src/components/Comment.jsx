@@ -17,15 +17,17 @@ const UserName=styled.span`
     font-size: 13px;
     font-style: bold;
     font-weight:700;
+    color: ${({theme})=> theme.textSoft}
 `
 const Description=styled.span`
     font-size: 14px;
+    color: ${({theme})=> theme.text}
 `
 const Date=styled.span`
     font-size: 12px;
     font-style: normal;
     font-weight:400;
-    color: ${(theme)=>theme.textSoft};
+    color: ${({theme})=>theme.textSoft};
     margin-left: 5px;
 `
 const Avatar=styled.img`
