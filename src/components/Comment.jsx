@@ -23,7 +23,7 @@ const Description=styled.span`
     font-size: 14px;
     color: ${({theme})=> theme.text}
 `
-const Date=styled.span`
+const Datee=styled.span`
     font-size: 12px;
     font-style: normal;
     font-weight:400;
@@ -38,6 +38,9 @@ const Avatar=styled.img`
 `
 const Comment = ({comment}) => {
     const [channel,setChannel]=useState({});
+    // debugger;
+    const dateObject = new Date(comment.createdAt);
+    const days = Math.floor((new Date() - dateObject)/(24*60*60*1000))
     useEffect(() => {
       const fetchComment=async()=>{
         const res=await axios.get(`https://vision-box-backend.vercel.app/api/users/find/${comment.userId}`);
@@ -50,7 +53,7 @@ const Comment = ({comment}) => {
     <Container>
         <Avatar src={channel?.img}></Avatar>
         <Info>
-         <UserName>{channel?.name} <Date>1 Day ago</Date> </UserName>
+         <UserName>{channel?.name} <Datee>{days===0?'today':days + ' days ago'}</Datee> </UserName>
          <Description>{comment?.desc} </Description>
         </Info>
     </Container>
