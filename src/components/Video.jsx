@@ -21,6 +21,7 @@ import {
 } from "../redux/videoSlice";
 import { subscription } from "../redux/userSlice";
 import Recomendation from "./Recomendation";
+import CommentModal from "./CommentModal";
 const Container = styled.div`
   display: flex;
   gap: 20px;
@@ -116,7 +117,15 @@ const VideoFrame = styled.video`
   width: 100%;
   object-fit: cover;
 `;
-
+const CommentButton= styled.button`
+    width: 100%;
+    padding: 6px 0px;
+    background:  ${({ theme }) => theme.bgLight};;
+    margin-bottom: 16px;
+    border: 1px solid  ${({ theme }) => theme.bgLight};
+    color:  ${({ theme }) => theme.text};
+    border-radius: 16px;
+`
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
@@ -225,6 +234,16 @@ const Video = () => {
     }
   };
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Container>
       <Content>
@@ -270,16 +289,22 @@ const Video = () => {
             </ChannelDetails>
           </ChannelInfo>
           <Subscribe onClick={handleSub}>
-            {currentUser?.subscribedUsers.includes(channel._id)
+            {currentUser?.subscribedUsers?.includes(channel._id)
               ? "SUBSCRIBED"
               : "SUBSCRIBE"}
           </Subscribe>
         </Channel>
-        <Hr />
-        <Comments videoId={currentVideo?._id} />
+        <Hr style={{marginBottom: screenWidth <=1000 && '0px'}}/>
+        { screenWidth > 1000 &&  <Comments videoId={currentVideo?._id} />}
+        {screenWidth <= 1000 && <CommentButton onClick={openModal}>Comments</CommentButton>}
         {screenWidth <= 1000 && (
           <Recomendation tags={currentVideo?.tags} type="lg" />
         )}
+        <CommentModal
+            isOpen={isModalOpen}
+            closeModal={closeModal}
+            videoId={currentVideo?._id}
+        />
       </Content>
       {screenWidth > 1000 && (
         <Recomendation tags={currentVideo?.tags} type="sm" />
