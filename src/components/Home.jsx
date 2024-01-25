@@ -8,7 +8,6 @@ const Container = styled.div`
   display: grid;
   flex-wrap: wrap;
   overflow: auto;
-  height: 100%;
   width: 100%;
   grid-template-columns: repeat(4,1fr);
   gap: 28px;
