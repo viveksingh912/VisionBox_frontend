@@ -17,7 +17,8 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  //height: calc(100vh - 60px);
+  overflow: hidden;
+  height: calc(100vh - 104px);
   padding: 22px 20px;
   @media (max-width: 700px) {
     padding: 12px 8px;
@@ -25,6 +26,8 @@ const Wrapper = styled.div`
 `;
 const Main = styled.div`
   background-color: ${({ theme }) => theme.bg};
+  position: relative;
+  overflow: hidden;
   /* display:flex; */
   color: ${({ theme }) => theme.text};
   flex: 7;
@@ -57,7 +60,7 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home setProgress={setProgress} type="random" />} />
+                  <Route index element={<Home setProgress={setProgress} progress={progress} type="random" />} />
                   <Route path="trends"  element={<Home setProgress={setProgress} type="trend" />} />
                   <Route path="subscriptions"  element={<Home setProgress={setProgress} type="sub" />} />
                   <Route path="search"  element={<Search setProgress={setProgress} />} />

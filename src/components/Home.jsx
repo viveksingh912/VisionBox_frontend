@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import styled from 'styled-components'
 import axios from 'axios'
+import CircularProgress from '@mui/material/CircularProgress';
 const Container = styled.div`
   display: grid;
   flex-wrap: wrap;
@@ -11,6 +12,7 @@ const Container = styled.div`
   width: 100%;
   grid-template-columns: repeat(4,1fr);
   gap: 28px;
+  height: calc(100vh - 104px);
   @media (max-width: 1800px) {
     grid-template-columns: repeat(3,1fr);
   }
@@ -22,7 +24,7 @@ const Container = styled.div`
     gap: 0;
   }
 `
-const Home = ({ type,setProgress }) => {
+const Home = ({ type,setProgress, progress }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -39,9 +41,9 @@ const Home = ({ type,setProgress }) => {
         const headers = {
           Authorization: `Bearer ${accessToken}`, // Add the access token to the header
         };
-        setProgress(40);
+        setProgress(30);
         const req = await axios.get(`https://vision-box-backend.vercel.app/api/videos/${type}`, { headers });
-        setProgress(75);
+        setProgress(70);
         setVideos(req.data);
         setProgress(100);
       } catch (err) {
@@ -52,13 +54,16 @@ const Home = ({ type,setProgress }) => {
     fetchVideos();
   }, [type]);
   return (
+  <>
+    { progress>0 && <CircularProgress style={{ display: 'flex' ,position:'absolute',top: '50%', left:'50%'}}/>}
     <Container>
       {
-        videos.map((video) => (
+        progress===0 && videos.map((video) => (
           <Card key={video._id} video={video} />
         ))
       }
     </Container>
+  </>
   )
 }
 
