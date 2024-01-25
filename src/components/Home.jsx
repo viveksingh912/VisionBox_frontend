@@ -4,11 +4,23 @@ import Card from './Card'
 import styled from 'styled-components'
 import axios from 'axios'
 const Container = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow: auto;
-    height: 100%;
+  display: grid;
+  flex-wrap: wrap;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(4,1fr);
+  gap: 28px;
+  @media (max-width: 1800px) {
+    grid-template-columns: repeat(3,1fr);
+  }
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(2,1fr);
+  } 
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1,1fr);
+    gap: 0;
+  }
 `
 const Home = ({ type }) => {
   const [videos, setVideos] = useState([]);
