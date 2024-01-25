@@ -23,6 +23,9 @@ const Container = styled.div`
     grid-template-columns: repeat(1,1fr);
     gap: 0;
   }
+  @media (max-width: 700px) {
+    height: calc(100vh - 84px);
+  }
 `
 const Home = ({ type,setProgress, progress }) => {
   const [videos, setVideos] = useState([]);

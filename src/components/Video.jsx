@@ -119,7 +119,7 @@ const VideoFrame = styled.video`
 `;
 const CommentButton= styled.button`
     width: 100%;
-    padding: 6px 0px;
+    padding: 8px 0px;
     background:  ${({ theme }) => theme.bgLight};;
     margin-bottom: 16px;
     border: 1px solid  ${({ theme }) => theme.bgLight};
@@ -306,11 +306,11 @@ const Video = ({setProgress}) => {
         {screenWidth <= 1000 && (
           <Recomendation tags={currentVideo?.tags} type="lg" />
         )}
-        <CommentModal
+        {screenWidth<=1000 && <CommentModal
             isOpen={isModalOpen}
             closeModal={closeModal}
             videoId={currentVideo?._id}
-        />
+        />}
       </Content>
       {screenWidth > 1000 && (
         <Recomendation tags={currentVideo?.tags} type="sm" />
