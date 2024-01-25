@@ -27,11 +27,12 @@ const Container = styled.div`
     height: calc(100vh - 84px);
   }
 `
-const Home = ({ type,setProgress, progress }) => {
+const Home = ({ type,setProgress }) => {
   const [videos, setVideos] = useState([]);
-
+  const [loading, setLoading] =useState(true);
   useEffect(() => {
     const fetchVideos = async () => {
+      setLoading(true);
       setProgress(0);
       try {
         let accessToken = null;
@@ -47,10 +48,12 @@ const Home = ({ type,setProgress, progress }) => {
         setProgress(30);
         const req = await axios.get(`https://vision-box-backend.vercel.app/api/videos/${type}`, { headers });
         setProgress(70);
+        setLoading(false);
         setVideos(req.data);
         setProgress(100);
       } catch (err) {
         setProgress(100);
+        setLoading(false);
         console.log(err);
       }
     };
@@ -58,10 +61,10 @@ const Home = ({ type,setProgress, progress }) => {
   }, [type]);
   return (
   <>
-    { progress>0 && <CircularProgress style={{ display: 'flex' ,position:'absolute',top: '50%', left:'50%'}}/>}
+    { loading && <CircularProgress style={{ display: 'flex' ,position:'absolute',top: '50%', left:'50%'}}/>}
     <Container>
       {
-        progress===0 && videos.map((video) => (
+        !loading && videos.map((video) => (
           <Card key={video._id} video={video} />
         ))
       }

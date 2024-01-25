@@ -61,7 +61,7 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home setProgress={setProgress} progress={progress} type="random" />} />
+                  <Route index element={<Home setProgress={setProgress} type="random" />} />
                   <Route path="trends"  element={<Home setProgress={setProgress} type="trend" />} />
                   <Route path="subscriptions"  element={<Home setProgress={setProgress} type="sub" />} />
                   <Route path="search"  element={<Search setProgress={setProgress} />} />
