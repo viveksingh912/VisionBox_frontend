@@ -11,6 +11,7 @@ import "./Scrollbar.css";
 import Search from "./components/Search";
 import { useSelector } from "react-redux";
 import { SetMeal } from "@mui/icons-material";
+import LoadingBar from 'react-top-loading-bar'
 const Container = styled.div`
   display: flex;
 `;
@@ -32,12 +33,18 @@ const Main = styled.div`
 function App() {
   const [darkMode, setdarkMode] = useState(true);
   const [small, setSmall] = useState(true);
+  const [progress, setProgress] = useState(30)
   const toggleSmall = (value) => {
     setSmall(value); 
   };
   return (
     <ThemeProvider theme={darkMode ? darktheme : lighttheme}>
       <BrowserRouter>
+        <LoadingBar
+            color='#f11946'
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+        />
         <Container>
           <Menu
             darkMode={darkMode}
@@ -50,12 +57,12 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home type="random" />} />
-                  <Route path="trends" element={<Home type="trend" />} />
-                  <Route path="subscriptions" element={<Home type="sub" />} />
-                  <Route path="search" element={<Search />} />
-                  <Route path="signin" element={<SignIn />}></Route>
-                  <Route path="video/:id" element={<Video />}></Route>
+                  <Route index element={<Home setProgress={setProgress} type="random" />} />
+                  <Route path="trends"  element={<Home setProgress={setProgress} type="trend" />} />
+                  <Route path="subscriptions"  element={<Home setProgress={setProgress} type="sub" />} />
+                  <Route path="search"  element={<Search setProgress={setProgress} />} />
+                  <Route path="signin"  element={<SignIn setProgress={setProgress} />}></Route>
+                  <Route path="video/:id"  element={<Video setProgress={setProgress} />}></Route>
                 </Route>
               </Routes>
             </Wrapper>

@@ -22,11 +22,12 @@ const Container = styled.div`
     gap: 0;
   }
 `
-const Home = ({ type }) => {
+const Home = ({ type,setProgress }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const fetchVideos = async () => {
+      setProgress(0);
       try {
         let accessToken = null;
         const User = localStorage.getItem('user');
@@ -38,9 +39,13 @@ const Home = ({ type }) => {
         const headers = {
           Authorization: `Bearer ${accessToken}`, // Add the access token to the header
         };
+        setProgress(40);
         const req = await axios.get(`https://vision-box-backend.vercel.app/api/videos/${type}`, { headers });
+        setProgress(75);
         setVideos(req.data);
+        setProgress(100);
       } catch (err) {
+        setProgress(100);
         console.log(err);
       }
     };

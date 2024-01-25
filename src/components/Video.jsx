@@ -126,7 +126,7 @@ const CommentButton= styled.button`
     color:  ${({ theme }) => theme.text};
     border-radius: 16px;
 `
-const Video = () => {
+const Video = ({setProgress}) => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
@@ -137,20 +137,26 @@ const Video = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setProgress(0);
       try {
         dispatch(fetchStart());
+        setProgress(40);
         const videoRes = await axios.get(`https://vision-box-backend.vercel.app/api/videos/find/${path}`);
+        setProgress(60);
         const channelRes = await axios.get(
           `https://vision-box-backend.vercel.app/api/users/find/${videoRes.data.userId}`
         );
+        setProgress(80);
         const addedView = await axios.get(`https://vision-box-backend.vercel.app/api/videos/view/${path}`);
         // console.log(videoRes.data);
         dispatch(
           fetchSuccess({ ...videoRes.data, views: videoRes.data.views + 1 })
         );
         // console.log(currentVideo);
+        setProgress(100);
         setChannel(channelRes.data);
       } catch (err) {
+        setProgress(100);
         dispatch(fetchFailure());
       }
     };

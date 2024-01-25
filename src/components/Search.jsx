@@ -4,21 +4,39 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components'
 import Card from './Card';
 const Container=styled.div`
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    gap: 10px;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(4,1fr);
+    gap: 28px;
+    @media (max-width: 1800px) {
+        grid-template-columns: repeat(3,1fr);
+    }
+    @media (max-width: 1400px) {
+        grid-template-columns: repeat(2,1fr);
+    }
+    @media (max-width: 800px) {
+        grid-template-columns: repeat(1,1fr);
+        gap: 0;
+    }
 `
-const Search = () => {
+const Search = ({setProgress}) => {
     const[videos,setVideo]=useState([]);
     const query=useLocation().search;
     useEffect(() => {
      const fetchVideos=async()=>{
+         setProgress(0);
         try{
-        const res=await axios.get(`https://vision-box-backend.vercel.app/api/videos/search${query}`)
-        setVideo(res.data);
-        console.log(res.data);
+            setProgress(40);
+            const res=await axios.get(`https://vision-box-backend.vercel.app/api/videos/search${query}`)
+            setProgress(70);
+            setVideo(res.data);
+            setProgress(100);
         }
         catch(err){
+            setProgress(100)
             console.log(err);
         }
      }
