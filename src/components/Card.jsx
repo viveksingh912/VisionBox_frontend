@@ -6,6 +6,7 @@ import { format } from "timeago.js"
 import hm from '../img/hm.jpg';
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '360px'};
+    margin: 0 auto;
     margin-bottom: ${(props) => props.type === 'sm' ? '10px' : '40px'};
     display: ${(props) => props.type === 'sm' && 'flex'};
     gap: 10px;
@@ -20,6 +21,7 @@ const Image = styled.img`
     background-color: #999;
     margin-bottom: ${(props) => props.type !== 'sm' && '40px'};
     flex: 1;
+    border-radius: 8px;
     @media (max-width: 2000px) {
       display: ${(props) => props.type === 'lg' && 'flex'};
       margin-bottom: ${(props) => props.type === 'lg' && '0px'};
@@ -84,7 +86,7 @@ const Card = (props) => {
   }, [video.userId])
   return (
     <Link to={`/video/${video._id}`} style={{ textDecoration: 'none' }} >
-      <Container type={type}>
+  <Container type={type}>
         <Image type={type} src={video.imgUrl} />
         <Details type={type}>
           <ChannelIMage type={type} src={channel.image ? channel.image : hm} />
@@ -94,7 +96,7 @@ const Card = (props) => {
             <Views>{video.views} views <li ></li>{format(video.createdAt)}</Views>
           </Texts>
         </Details>
-      </Container>
+  </Container>
     </Link>
   )
 }

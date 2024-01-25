@@ -75,7 +75,7 @@ const Links=styled.div`
 const Link=styled.a`
     cursor: pointer;
 `
-const SignIn = () => {
+const SignIn = ({setProgress}) => {
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -84,31 +84,39 @@ const SignIn = () => {
     const handleSignin = async (e) => {
         e.preventDefault();
         dispatch(loginStart());
+        setProgress(0);
         try {
+            setProgress(40);
           const res = await axios.post(
             'https://vision-box-backend.vercel.app/api/auth/signin',
             { name, password },
             
           );
-          
+          setProgress(80);
           dispatch(loginSuccess(res.data));
           console.log(res.data.accessToken);
+          setProgress(100);
           navigate('/');
         } catch (err) {
           dispatch(loginFailure());
+          setProgress(100);
           console.log(err);
         }
       };
     const handleSignUp=async (e)=>{
+        setProgress(0);
         e.preventDefault();
         dispatch(loginStart());
         try{
+            setProgress(40);
             const res=await axios.post(`https://vision-box-backend.vercel.app/api/auth/signup`,{name,email,password});
-        
+            setProgress(80);
             dispatch(loginSuccess(res.data));
+            setProgress(100);
             navigate("/");
         }
         catch(err){
+            setProgress(100);
             dispatch(loginFailure());
             console.log(err);
         }
